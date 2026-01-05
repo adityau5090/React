@@ -3,13 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { deleteUser, getAllUsers } from '../../actions/serverActions'
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { Trash2 } from 'lucide-react';
+import { Edit, Trash2 } from 'lucide-react';
+import UpdateUser from './UpdateUser';
 
 const UserList = async () => {
     const response = await getAllUsers();
 
     const users = Array.isArray(response?.data) ? response.data : []
-    // console.log("Users :",users);
 
     if (!Array.isArray(users) || users.length == 0) {
         return (
@@ -43,10 +43,11 @@ const UserList = async () => {
                                 <p className='text-muted-foreground text-xs'>{user.email}</p>
                                <p className='text-muted-foreground text-xs'>Created: {user.createdAt && new Date(user.createdAt).toLocaleDateString()}</p>
                             </div>
-                            <div>
+                            <div className='flex gap-2'>
+                                <UpdateUser user={user}  />
                                 <form action={deleteUser.bind(null, user.id )}>
                                     <Button variant='destructive' size='sm' type="submit" className="hover:cursor-pointer">
-                                        <Trash2 className='w-4 h-4'/>
+                                        <Trash2 className='w-2 h-2'/>
                                     </Button>
                                 </form>
                             </div>

@@ -101,7 +101,7 @@ const updateUser = async (id, formData) => {
         return {
             success: true,
             message: "User updated successfully",
-            data: user,
+            // data: user,
         }
     } catch (error) {
         console.log("Error in updating user : ", error);
